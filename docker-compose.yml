@@ -1,0 +1,42 @@
+services:
+
+  ollama:
+    image: ollama/ollama
+    container_name: ollama-server
+    ports:
+      - "11434:11434"
+
+    volumes:
+      - ollama-models:/root/.ollama
+      - ./server/ollama-init.sh:/ollama-init.sh
+
+    entrypoint: ["/bin/bash", "/ollama-init.sh"]
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      retries: 5
+      start_period: 40s
+
+  client:
+    build: ./client
+    container_name: ollama-client
+
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - MODEL=phi3:mini
+
+    volumes:
+      - ./client:/app
+
+    stdin_open: true
+    tty: true
+
+volumes:
+  ollama-models:

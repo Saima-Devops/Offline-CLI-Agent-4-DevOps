@@ -1,0 +1,19 @@
+#!/bin/bash
+
+STACK_DIR="$HOME/ollama-stack"
+
+cd "$STACK_DIR" || exit
+
+# Start server if not running
+docker compose up -d ollama >/dev/null
+
+# Interactive mode
+if [ $# -eq 0 ]; then
+    echo "💬 Launching interactive Ollama client..."
+    docker compose run --rm client
+    exit
+fi
+
+PROMPT="$*"
+
+docker compose run --rm client python /app/ollama_client.py "$PROMPT"
