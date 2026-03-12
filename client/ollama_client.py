@@ -7,13 +7,6 @@ import json
 import threading
 import time
 
-# Optional clipboard support
-try:
-    import pyperclip
-    CLIPBOARD_AVAILABLE = True
-except ModuleNotFoundError:
-    CLIPBOARD_AVAILABLE = False
-
 # ======================================
 # Configuration
 # ======================================
@@ -112,9 +105,7 @@ def stream_chat(prompt):
         print("🤖 AI:\n")
         print(full_response)
 
-        if CLIPBOARD_AVAILABLE and full_response:
-            pyperclip.copy(full_response)
-            print("📋 Response copied to clipboard!\n")
+        # Removed clipboard functionality
 
         return full_response
 
