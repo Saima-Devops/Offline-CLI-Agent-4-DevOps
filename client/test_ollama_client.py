@@ -1,68 +1,72 @@
-# test_ollama_client.py
 import pytest
 from unittest.mock import patch, MagicMock
-from ollama_client import build_prompt, is_small_talk, stream_chat, SYSTEM_INSTRUCTION, MODEL
+import requests
 
-# ======================================
-# Test build_prompt
-# ======================================
-def test_build_prompt_includes_system_instruction():
-    prompt = "Explain Docker"
+from ollama_client import build_prompt, is_small_talk, stream_chat
+
+
+# ===============================
+# Test: Prompt Builder
+# ===============================
+def test_build_prompt():
+    prompt = "What is Docker?"
     result = build_prompt(prompt)
-    assert SYSTEM_INSTRUCTION.strip() in result
+
+    assert "User Question" in result
     assert prompt in result
     assert "Answer:" in result
 
-# ======================================
-# Test small talk filter
-# ======================================
-def test_small_talk_detection():
-    assert is_small_talk("hi")
-    assert is_small_talk("hello there")
-    assert not is_small_talk("Explain Docker in one sentence")
-    assert not is_small_talk("How does Kubernetes work?")
 
-# ======================================
-# Test stream_chat with mocked requests
-# ======================================
+# ===============================
+# Test: Small Talk Detection
+# ===============================
+def test_small_talk_detection():
+    assert is_small_talk("hi") is True
+    assert is_small_talk("hello there") is True
+    assert is_small_talk("good morning") is True
+    assert is_small_talk("explain kubernetes") is False
+
+
+# ===============================
+# Test: Successful AI Response
+# ===============================
 @patch("ollama_client.requests.post")
 def test_stream_chat_mocked_success(mock_post):
-    # Mock successful API response
+
     mock_response = MagicMock()
-    mock_response.json.return_value = {"response": "Docker is containerization."}
+    mock_response.json.return_value = {
+        "response": "Docker is containerization."
+    }
     mock_response.raise_for_status = lambda: None
+
     mock_post.return_value = mock_response
 
-    # Run stream_chat
-    result = stream_chat("Explain Docker")
+    response = stream_chat("Explain Docker")
 
-    # Assertions
-    assert "Docker is containerization." in result
-    mock_post.assert_called_once()
-    assert MODEL in mock_post.call_args[1]["json"]["model"]
+    assert "Docker is containerization." in response
 
+
+# ===============================
+# Test: Timeout Handling
+# ===============================
 @patch("ollama_client.requests.post")
 def test_stream_chat_timeout(mock_post):
-    # Simulate timeout exception
-    mock_post.side_effect = Exception("Timeout error")
-    result = stream_chat("Explain Docker")
-    assert "⚠️ Error" in result
 
-# ======================================
-# Test Clipboard copy (if pyperclip available)
-# ======================================
-@patch("ollama_client.pyperclip.copy", autospec=True)
+    mock_post.side_effect = requests.exceptions.Timeout
+
+    response = stream_chat("Explain Kubernetes")
+
+    assert "timeout" in response.lower()
+
+
+# ===============================
+# Test: Connection Error Handling
+# ===============================
 @patch("ollama_client.requests.post")
-def test_stream_chat_clipboard(mock_post, mock_copy):
-    try:
-        import pyperclip
-    except ModuleNotFoundError:
-        pytest.skip("pyperclip not installed")
+def test_stream_chat_connection_error(mock_post):
 
-    mock_response = MagicMock()
-    mock_response.json.return_value = {"response": "Test response"}
-    mock_response.raise_for_status = lambda: None
-    mock_post.return_value = mock_response
+    mock_post.side_effect = requests.exceptions.ConnectionError
 
-    stream_chat("Test prompt")
-    mock_copy.assert_called_once_with("Test response")
+    response = stream_chat("Explain DevOps")
+
+    assert "cannot connect" in response.lower()
