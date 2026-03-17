@@ -46,6 +46,13 @@ Phi-3 Mini Local Model <br>
 
 ## Components:
 
+- Ollama Phi-3 Mini Local Model
+- Python Scripts for main logic
+- Shell Scripts for automation
+- Docker & Docker Compose for containerization 
+- Dockerfile
+- docker-compose.yml
+
 ----
 
 ## ⚙️ Features
@@ -96,7 +103,7 @@ saim2026/ollama-agent:v1.01
 
 ---
 
-## 🚀 Quick Start (Run From Docker Hub)
+## 🚀 Quick Start (Run From Docker Hub) - Option#1
 
 ### 1️⃣ Install prerequisites
 
@@ -199,6 +206,78 @@ Kubernetes is a container orchestration system.
 • Provides service discovery
 • Enables self-healing infrastructure
 ```
+-----
+
+## Option#2 - Download the entire project from the GitHub repo
+
+STEP 1️⃣: mkdir && cd into the root folder
+
+STEP 2️⃣: Make Sure Scripts Are Executable
+
+Check both your scripts:
+
+```bash
+chmod +x setup.sh
+chmod +x ollama-server/ollama-init.sh
+chmod +x ai
+```
+
+STEP 3️⃣: Run Setup Script
+
+Run your setup.sh:
+
+```bash
+./setup.sh
+```
+
+**What it does:**
+
+- Checks Docker & Docker Compose.
+
+- Validates project files (ai and ollama-init.sh).
+
+- Applies executable permissions.
+
+- Creates Docker volume ollama-models.
+
+- Installs the global ai command (/usr/local/bin/ai).
+
+- Sets default model to Phi-3 Mini.
+
+- Builds Docker images (docker compose build).
+
+- Starts the Ollama server container (docker compose up -d ollama).
+
+✅ After this, you should see:
+
+```bash
+🎉 Ollama Lightweight Stack (Phi-3 Mini) is ready!
+You can now run AI prompts from anywhere:
+   ai "Explain Docker in one sentence"
+```
+
+**After that you can simply run:**
+
+```bash
+ai "Explain Docker in one sentence"
+```
+
+or access the ai CLI prompt globally from anywhere
+
+```bash
+ai
+```
+
+### ✅ Notes
+
+- No need to pull `Phi-3` manually — ollama-init.sh handles it.
+
+- Global CLI `ai` works anywhere (/usr/local/bin/ai).
+
+- Docker volume `ollama-models` persists downloaded models across restarts.
+
+- Your `setup.sh` automates everything from permissions to server start.
+
 -----
 
 ### 📁 Project Structure
