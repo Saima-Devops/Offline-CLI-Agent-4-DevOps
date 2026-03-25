@@ -1,4 +1,4 @@
-# 🤖 Offline CLI Agent for DevOps Users & Developers
+# Offline CLI Agent 🤖 for DevOps Users & Developers
 
 A **lightweight offline AI CLI assistant** designed for **DevOps engineers**.
 This project runs a local large language model using **Ollama** and the **Phi‑3 Mini model** inside **Docker**, allowing users to interact with an **AI assistant** without relying on **external cloud APIs**.
@@ -7,11 +7,11 @@ The assistant runs in the terminal and helps answer **DevOps, cloud, Linux,** an
 
 <br>
 
-**⭐ Runs fully offline — your AI assistant stays private and secure.**
+** Runs fully offline — your AI assistant stays private and secure.**
 
 ---
 
-## 📌 Project Goals
+## Project Goals
 
 This project demonstrates how to build a **secure, lightweight, offline AI assistant** with:
 
@@ -29,7 +29,7 @@ This project demonstrates how to build a **secure, lightweight, offline AI assis
 
 -----
 
-## 🏗 Architecture Overview
+## Architecture Overview
 
 User Terminal <br>
       │<br>
@@ -55,7 +55,7 @@ Phi-3 Mini Local Model <br>
 
 ----
 
-## ⚙️ Features
+## Features
 
 ✅ Offline **AI assistant** <br>
 ✅ DevOps-focused responses <br>
@@ -71,7 +71,7 @@ Phi-3 Mini Local Model <br>
 
 ----
 
-## 🧠 AI Model
+## AI Model
 
 This project uses: **Phi‑3 Mini**
 
@@ -89,7 +89,7 @@ This project uses: **Phi‑3 Mini**
 
 ----
 
-## 📦 Docker Hub Image
+## Docker Hub Image
 
 The prebuilt container image is available on:
 
@@ -103,7 +103,7 @@ saim2026/ollama-agent:v1.01
 
 ---
 
-## 🚀 Quick Start (Run From Docker Hub) - Option#1
+## Quick Start (Run From Docker Hub) - Option#1
 
 ### 1️⃣ Install prerequisites
 
@@ -122,7 +122,7 @@ docker compose version
 
 ---
 
-### 📥 Step 1 — Pull the Docker Image
+### Step 1 — Pull the Docker Image
 
 ```bash
 docker pull saim2026/ollama-agent:v1.01
@@ -130,7 +130,7 @@ docker pull saim2026/ollama-agent:v1.01
 
 ---
 
-### 📂 Step 2 — Create a docker-compose.yml
+### Step 2 — Create a docker-compose.yml
 
 Create a file named: `docker-compose.yml` or download from the repo
 
@@ -178,7 +178,7 @@ volumes:
 ```
 ----
 
-### ▶️ Step 3 — Start the AI Assistant
+### Step 3 — Start the AI Assistant
 
 Run:
 ```bash
@@ -193,7 +193,7 @@ docker compose up
 
 -----
 
-### 💬 Example Usage
+### Example Usage
 
 ```bash
 👤 YOU: explain Kubernetes in one line
@@ -280,7 +280,7 @@ ai
 
 -----
 
-### 📁 Project Structure
+### Project Structure
 ```bash
 ollama-stack/
 │
@@ -324,7 +324,7 @@ CI/CD is implemented using GitHub Actions.
 
 -----
 
-### 🔒 Security Practices
+### Security Practices
 
 This project includes security-focused DevOps practices:
 
@@ -352,7 +352,7 @@ This project includes security-focused DevOps practices:
 
 -----
 
-### 🧪 Testing
+### Testing
 
 **Run tests locally:**
 
@@ -372,7 +372,7 @@ pytest
 
 ------
 
-### 🛠 Future Improvements
+### Future Improvements
 
 - Conversation memory
 
@@ -388,25 +388,20 @@ pytest
 
 -----
 
-### 👩‍💻 Author
+### Author
 
-Developed by:
-
-**Saima Usman**
-DevOps & Cloud Enthusiast
-
-<br>
-
-### ⭐ Support
-
-**If you find this project useful:**
-
-- Star the repository
-
-- Share with DevOps community
-
-- Open Issues for improvements
-
+Developed by:\
+**Saima Usman**\
+DevOps & Cloud Enthusiast\
+**GitHub:** https://github.com/Saima-Devops\
 
 -----
 
+### Support
+
+- If you found this helpful, don’t forget to ⭐ the repo!\
+- Share with DevOps community!\
+
+Thank you!
+
+------
