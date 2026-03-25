@@ -399,8 +399,8 @@ DevOps & Cloud Enthusiast\
 
 ### Support
 
-- If you found this helpful, don’t forget to ⭐ the repo!\
-- Share with DevOps community!\
+- If you found this helpful, don’t forget to ⭐ the repo!
+- Share with DevOps community!
 
 Thank you!
 
